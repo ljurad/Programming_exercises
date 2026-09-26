@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Converted from Markdown</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+    }
+    h1, h2, h3 { color: #333; margin-top: 1.5em; margin-bottom: 0.5em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.2em; }
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      line-height: 1.4;
+    }
+    blockquote {
+      border-left: 4px solid #ddd;
+      margin: 1em 0;
+      padding-left: 20px;
+      color: #666;
+      font-style: italic;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+    ul, ol {
+      margin: 1em 0;
+      padding-left: 2em;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+  </style>
+</head>
+<body>
+<h1>СТЕКОВИ И РЕДОВИ (STACKS AND QUEUES)</h1>
+<p>Овај кратак, делимични преглед предавања обухвата:</p>
+<ul>
+<li>Стекове, основе - Stacks</li>
+<li>Rедове, основе - Queues</li>
+<li>Везу до коришћене презентације</li>
+</ul>
+<h1>Увод у структуру података стека</h1>
+<p>Стек је линеарна структура података која прати <strong>LIFO</strong> (Last In First Out) први уђе, последњи изађе принцип, последњи уметнути елемент је први који се избацује. То значи да се и операције уметања и брисања дешавају само на једном крају.</p>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20250826120607519143/push232.jpg" alt="Операција уклањања са стека"></p>
+<p><strong>LIFO (Last In First Out) принцип (последњи ушао, први изашао)</strong></p>
+<p>LIFO принцип значи да је последњи елемент додат на стек први који се уклања.</p>
+<ul>
+<li>Нови елементи се увек додају-гурају (<strong>push</strong>) на врх.</li>
+<li>Уклањање (<strong>pop</strong>) се такође дешава само са врха.</li>
+<li>Ово обезбеђује строги редослед: последњи ушао → први изашао.</li>
+</ul>
+<p><strong>Примери LIFO методе из стварног света:</strong></p>
+<ul>
+<li><strong>Гомила тањира</strong> – Последњи тањир који се постави на врх је први који узмете.</li>
+<li><strong>Гомила књига</strong> – Књиге се додају и уклањају одозго, тако да се последња постављена књига прва узима.</li>
+</ul>
+<p><strong>Основна терминологија стека</strong></p>
+<ul>
+<li><strong>Врх</strong>: Позиција последње уметнутог елемента. Уметање (push) и брисање (pop) се увек извршавају на врху стека.</li>
+<li><strong>Величина</strong>: Односи се на тренутни број елемената присутних у стеку.</li>
+</ul>
+<h2>Врсте стека:</h2>
+<p><strong>Стек фиксне величине</strong></p>
+<ul>
+<li>Стек фиксне величине има унапред дефинисани капацитет.</li>
+<li>Када се попуни, не могу се додати додатни елементи (то доводи до преливања <strong><a href="https://en.wikipedia.org/wiki/Stack_overflow">overflow</a></strong>).</li>
+<li>Ако је стек празан и покушамо да уклонимо елемент, то изазива недовољно преливање (<strong><a href="https://en.wikipedia.org/wiki/Buffer_underrun">underflow</a></strong>).</li>
+<li>Обично се имплементира коришћењем статичког низа.</li>
+</ul>
+<p>Пример: Декларисање стека величине 10 коришћењем низа.</p>
+<p><strong>Динамички стек величине</strong></p>
+<ul>
+<li>Динамички стек величине може аутоматски да расте и смањује се по потреби.</li>
+<li>Ако је стек пун, његов капацитет се шири како би омогућио смештај више елемената.</li>
+<li>Како се елементи уклањају, може се смањити и коришћење меморије.</li>
+<li>Може се имплементирати коришћењем:</li>
+<li>Повезана листа → природно расте/смањује се.</li>
+<li>Динамички низ (као вектор у C++ или ArrayList у Јави) → аутоматски мења величину.
+Пример: Имплементација стека коришћењем повезане листе или низа променљиве величине.</li>
+</ul>
+<p>Напомена: У пракси уобичајено користимо динамичке стекове, јер они могу да расту или се смањују по потреби без проблема са преливањем.</p>
+<h2>Уобичајене операције на стеку:</h2>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20260123124226748651/031.webp" alt="Операције на стеку"></p>
+<p>Да бисмо извршили манипулације у стеку, доступне су нам одређене операције.</p>
+<ul>
+<li><strong>push()</strong> да би се убацио елемент у стек.</li>
+<li><strong>pop()</strong> да бисте уклонили елемент са стека.</li>
+<li><strong>top()</strong> Враћа горњи елемент стека.</li>
+<li><strong>isEmpty()</strong> враћа true ако је стек празан, иначе false.</li>
+<li><strong>size()</strong>  враћа величину стека.</li>
+</ul>
+<h1>Увод у ред</h1>
+<p>Ред је линеарна структура података која прати <strong>FIFO</strong> (First In First Out) први уђе, први изађе принцип, тако да се први уметнути елемент први избацује.</p>
+<ul>
+<li>То је уређена листа у којој се уметања ради на једном крају, познатом као задњи део, а брисања се извршава са другог краја, познатог као предњи део.</li>
+<li>Добар пример реда је било који ред потрошача за ресурс где се потрошач који је први дошао први услужује. </li>
+<li>Разлика између стека и реда чекања је у уклањању елемента. У стеку уклањамо ставку која је последњи пут додата, док у реду чекања уклањамо ставку која је најраније додата.</li>
+</ul>
+<h2>FIFO принцип у реду чекања:</h2>
+<p>FIFO принцип каже да ће први елемент додат у ред бити први који ће бити уклоњен или обрађен. Дакле, ред је као ред људи који чекају да купе карте, где је прва особа у реду прва особа која је услужена (тј. ко први дође, први служи).</p>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20250827110558739481/Dequeue-Operation-in-Queue-1.webp" alt="Операција уклањања из реда"></p>
+<h2>Основна терминологија реда чекања</h2>
+<ul>
+<li><strong>Почетни - Front</strong>: Позиција уноса у реду спремног за опслуживање, односно први унос који ће бити уклоњен из реда, назива се почетак реда. Такође се назива и глава реда.</li>
+<li><strong>Крајњи - Rear</strong>: Позиција последњег уноса у реду, односно оног који је последњи пут додат, назива се крај реда. Такође се назива и реп реда.</li>
+<li><strong>Величина - Size</strong>: Величина се односи на тренутни број елемената у реду чекања.</li>
+<li><strong>Капацитет - Capacity</strong>: Капацитет се односи на максималан број елемената које је ред способан да садржи.</li>
+</ul>
+<h2>Врсте редова</h2>
+<p>Структура података реда може се класификовати у 3 врсте:</p>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20250917154046246598/Types-of-Queue.webp" alt="Врсте редова"></p>
+<h2>1. Једноставан ред</h2>
+<p>Једноставан ред прати FIFO (Први уђе, први изађе) принцип.</p>
+<ul>
+<li>Уметање је дозвољено само позади (назад).</li>
+<li>Брисање је дозвољено само са предње стране.</li>
+<li>Може се имплементирати коришћењем повезане листе или кружног низа.</li>
+</ul>
+<p>Када се користи низ, често бирамо <strong><a href="https://sr.wikipedia.org/sr/%D0%9A%D1%80%D1%83%D0%B6%D0%BD%D0%B8_%D0%B1%D0%B0%D1%84%D0%B5%D1%80" title="кружни бафер">кружни ред</a></strong>, који је углавном ефикасна имплементација једноставног реда низа. Он ефикасно користи меморију поновним коришћењем празних простора који остану након брисања, избегавајући расипање које се јавља код основне имплементације линеарног низа.</p>
+<h2>2. Ред са два краја (Deque)</h2>
+<p>У деку <a href="https://en.wikipedia.org/wiki/Double-ended_queue" title="Double-ended queue">Deque</a> (Double-ended queue), уметање и брисање се може извршавати са оба краја.</p>
+<h2>3. Ред са приоритетом</h2>
+<p><a href="https://en.wikipedia.org/wiki/Priority_queue" title="Priority queue">Priority queue</a> јесте ред у коме је сваком елементу додељен <strong><a href="https://sr.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B4_%D1%81%D0%B0_%D0%BF%D1%80%D0%B8%D0%BE%D1%80%D0%B8%D1%82%D0%B5%D1%82%D0%BE%D0%BC" title="ред са приоритетом">приоритет</a></strong>, а брисање се увек дешава на основу приоритета (не само позиције).</p>
+<h2>Операције са редом</h2>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20260123124226975340/011.webp" alt="Операције са редом"></p>
+<ul>
+<li><strong>Enqueue() - додавање у ред</strong>: Додаје елемент на крај (задњи део) реда. Ако је ред пун, јавља се грешка прекорачења.</li>
+<li><strong>Dequeue() - уклањање из реда</strong>: Уклања елемент са почетка реда. Ако је ред празан, јавља се грешка недовољног преливања.</li>
+<li><strong>Peek()/Front()</strong>: Враћа елемент на предњој страни без његовог уклањања.</li>
+<li><strong>Size() - величина</strong>: Враћа број елемената у реду чекања.</li>
+<li><strong>isEmpty()</strong>: Враћа вредност true ако је ред празан, у супротном вредност false.</li>
+<li><strong>isFull()</strong>: Враћа вредност true ако је ред пун, у супротном вредност false.</li>
+</ul>
+<hr>
+<p>Током часа су коришћене илустрације са презентације:<br><a href="https://cs.ucr.edu/~tyf/10c/04.stacks-queues/04.stacks-queues.html#2">CS 10C: Data Structures and Algorithms</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Abstract_data_type" title="Abstract data type">Abstract Data Type (ADT)</a> - Апстрактни типови података (ADT) дефинишу које су операције дозвољене, док кориснички дефинисани типови података <a href="https://en.wikipedia.org/wiki/Record_(computer_science)" title="User defined type">User defined type (UDT)</a> дефинишу како се подаци чувају и имплементирају.</p>
+<iframe src="https://cs.ucr.edu/~tyf/10c/04.stacks-queues/04.stacks-queues.html#12"" width="800" height="600" title="Sample Iframe"></iframe>
+
+</body>
+</html>
